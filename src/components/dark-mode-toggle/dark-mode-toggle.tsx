@@ -12,7 +12,7 @@ export default function DarkModeToggle(props: DarkModeToggleProps) {
   return (
     <Tooltip title={`Turn ${props.light ? "off" : "on"} the light`}>
       <IconButton
-        color="primary"
+        color="inherit"
         onClick={() => props.setLight((prev) => !prev)}
       >
         {props.light ? <LightModeIcon /> : <DarkModeIcon />}

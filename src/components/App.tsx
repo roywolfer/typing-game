@@ -1,6 +1,6 @@
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
-import DarkModeToggle from "./dark-mode-toggle/dark-mode-toggle";
+import TopBar from "./top-bar/top-bar";
 
 const themeLight = createTheme({
   palette: {
@@ -22,12 +22,12 @@ const themeDark = createTheme({
 });
 
 export default function App() {
-  const [light, setLight] = React.useState(true);
+  const [light, setLight] = React.useState(false);
 
   return (
     <ThemeProvider theme={light ? themeLight : themeDark}>
       <CssBaseline />
-      <DarkModeToggle light={light} setLight={setLight} />
+      <TopBar light={light} setLight={setLight} />
     </ThemeProvider>
   );
 }
