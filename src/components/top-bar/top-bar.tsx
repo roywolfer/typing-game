@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Icon } from "@mui/material";
 import { SetStateAction } from "react";
 import Logo from "../../../assets/keyboard.svg";
-import DarkModeToggle from "../dark-mode-toggle/dark-mode-toggle";
+import DarkModeToggle from "./components/dark-mode-toggle/dark-mode-toggle";
 
 interface TopBarProps {
   light: boolean;
@@ -10,7 +10,7 @@ interface TopBarProps {
 
 export default function TopBar(props: TopBarProps) {
   return (
-    <AppBar position="static" color="secondary" sx={{ display: "flex" }}>
+    <AppBar position="static" color="inherit" sx={{ display: "flex" }}>
       <Toolbar variant="dense">
         <Icon sx={{ mr: 2 }}>
           <img src={Logo} height={25} width={25} />
