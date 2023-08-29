@@ -1,7 +1,7 @@
 import { CssBaseline, Grid, ThemeProvider, createTheme } from "@mui/material";
 import React from "react";
-import TopBar from "./top-bar/top-bar";
-import TypingGame from "./typing-game/typing-game";
+import TopBar from "./top-bar/topBar";
+import TypingGame from "./typing-game/typingGame";
 
 const themeLight = createTheme({
   palette: {

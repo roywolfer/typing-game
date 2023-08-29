@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Icon } from "@mui/material";
 import { SetStateAction } from "react";
 import Logo from "../../../assets/keyboard.svg";
-import DarkModeToggle from "./components/dark-mode-toggle/dark-mode-toggle";
+import DarkModeToggle from "./components/dark-mode-toggle/darkModeToggle";
 
 interface TopBarProps {
   light: boolean;
