@@ -5,11 +5,11 @@ import { useContext } from "react";
 import { DarkModeContext } from "../../../dark-mode-context/darkModeContext";
 
 export function DarkModeToggle() {
-  const { isDarkTheme, changeTheme } = useContext(DarkModeContext);
+  const { isDarkTheme, toggleTheme } = useContext(DarkModeContext);
 
   return (
     <Tooltip title={`Turn ${isDarkTheme ? "on" : "off"} the light`}>
-      <IconButton color="inherit" onClick={changeTheme}>
+      <IconButton color="inherit" onClick={toggleTheme}>
         {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
       </IconButton>
     </Tooltip>

@@ -3,7 +3,7 @@ import { DarkModeProviderValue } from "./types";
 
 export const DarkModeContext = createContext<DarkModeProviderValue>({
   isDarkTheme: true,
-  changeTheme: () => {},
+  toggleTheme: () => {},
 });
 
 interface DarkModeProviderProps {

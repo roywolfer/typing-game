@@ -7,10 +7,10 @@ import { gameStyle, themeDark, themeLight } from "./styles";
 
 export function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
-  const changeTheme = () => setIsDarkTheme(!isDarkTheme);
+  const toggleTheme = () => setIsDarkTheme(!isDarkTheme);
 
   return (
-    <DarkModeProvider value={{ isDarkTheme, changeTheme }}>
+    <DarkModeProvider value={{ isDarkTheme, toggleTheme }}>
       <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
         <CssBaseline />
         <TopBar />
