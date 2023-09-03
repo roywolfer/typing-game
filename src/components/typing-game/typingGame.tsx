@@ -8,6 +8,7 @@ import RestartButton from "./components/restart-button/restartButton";
 import { GRID_GAP, TEXT_BOX_STYLE, TEXT_INPUT_STYLE } from "./styles";
 import Timer from "./components/timer/Timer";
 import { GameContextValue, GameState } from "./types";
+import GameResult from "./components/game-result/gameResult";
 
 export const GameContext = createContext<GameContextValue>({
   gameState: "starting",
@@ -30,7 +31,7 @@ export default function TypingGame() {
   return (
     <GameContext.Provider value={{ gameState, setGameState }}>
       <Grid container gap={GRID_GAP}>
-        <Grid item container xs={12} sx={TEXT_BOX_STYLE}>
+        <Grid item xs={12} sx={TEXT_BOX_STYLE}>
           <TextBox currentWord={currentWord} wordList={wordList} />
         </Grid>
         <Grid item gap={GRID_GAP} xs={12} sx={TEXT_INPUT_STYLE}>
@@ -42,6 +43,11 @@ export default function TypingGame() {
           <Timer />
           <RestartButton restartGame={restartGame} />
         </Grid>
+        {gameState === "starting" && (
+          <Grid item xs={12} sx={TEXT_BOX_STYLE}>
+            <GameResult />
+          </Grid>
+        )}
       </Grid>
     </GameContext.Provider>
   );
