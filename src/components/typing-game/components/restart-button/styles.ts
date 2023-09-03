@@ -1,1 +1,1 @@
-export const RESTART_BUTTON_STYLE = { minWidth: 0 };
+export const restartButtonStyle = { minWidth: 0 };

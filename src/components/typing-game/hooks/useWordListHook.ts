@@ -2,10 +2,18 @@ import { useState } from "react";
 import { Word } from "../types";
 import { WORDS } from "../consts";
 
-export default function useWordListHook(): [Word[], () => void] {
+interface WordListHook {
+  wordList: Word[];
+  shuffleWordList: () => void;
+}
+
+export function useWordList(): WordListHook {
   const [wordList, setWordList] = useState(getNewWordList());
 
-  return [wordList, () => setWordList(getNewWordList())];
+  return {
+    wordList,
+    shuffleWordList: () => setWordList(getNewWordList()),
+  };
 }
 
 function getNewWordList(): Word[] {

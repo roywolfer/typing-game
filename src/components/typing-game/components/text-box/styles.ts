@@ -2,7 +2,7 @@ import { Theme } from "@emotion/react";
 import { SxProps } from "@mui/material";
 import { Word } from "../../types";
 
-export const TEXT_BOX_STYLE = {
+export const textBoxStyle = {
   display: "flex",
   flexWrap: "wrap",
   height: "5em",

@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import { Word } from "../../types";
 import { useCallback, ChangeEvent, useContext } from "react";
-import { TEXT_INPUT_STYLE } from "./styles";
-import { GameContext } from "../../typingGame";
+import { textInputStyle } from "./styles";
+import { GameContext } from "../../game-context/gameContext";
 
 interface TextInputProps {
   currentWord: Word;
@@ -10,7 +10,7 @@ interface TextInputProps {
   setWritten: (written: string) => void;
 }
 
-export default function TextInput({
+export function TextInput({
   currentWord,
   nextWord,
   setWritten,
@@ -39,10 +39,10 @@ export default function TextInput({
   return (
     <TextField
       fullWidth
-      value={gameState === "playing" ? currentWord.written : ""}
+      value={currentWord.written}
       onChange={updateWritten}
       disabled={gameState === "ended"}
-      sx={TEXT_INPUT_STYLE}
+      sx={textInputStyle}
     />
   );
 }

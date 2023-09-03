@@ -1,21 +1,16 @@
 import { Tooltip, IconButton } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { SetStateAction } from "react";
+import { useContext } from "react";
+import { DarkModeContext } from "../../../dark-mode-context/darkModeContext";
 
-interface DarkModeToggleProps {
-  light: boolean;
-  setLight: (value: SetStateAction<boolean>) => void;
-}
+export function DarkModeToggle() {
+  const { isDarkTheme, changeTheme } = useContext(DarkModeContext);
 
-export default function DarkModeToggle(props: DarkModeToggleProps) {
   return (
-    <Tooltip title={`Turn ${props.light ? "off" : "on"} the light`}>
-      <IconButton
-        color="inherit"
-        onClick={() => props.setLight((prev) => !prev)}
-      >
-        {props.light ? <LightModeIcon /> : <DarkModeIcon />}
+    <Tooltip title={`Turn ${isDarkTheme ? "on" : "off"} the light`}>
+      <IconButton color="inherit" onClick={changeTheme}>
+        {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
       </IconButton>
     </Tooltip>
   );

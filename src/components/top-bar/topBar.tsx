@@ -1,14 +1,8 @@
 import { AppBar, Toolbar, Typography, Icon } from "@mui/material";
-import { SetStateAction } from "react";
 import Logo from "../../../assets/keyboard.svg";
-import DarkModeToggle from "./components/dark-mode-toggle/darkModeToggle";
+import { DarkModeToggle } from "./components/dark-mode-toggle/darkModeToggle";
 
-interface TopBarProps {
-  light: boolean;
-  setLight: (value: SetStateAction<boolean>) => void;
-}
-
-export default function TopBar(props: TopBarProps) {
+export function TopBar() {
   return (
     <AppBar position="static" color="inherit" sx={{ display: "flex" }}>
       <Toolbar variant="dense">
@@ -23,7 +17,7 @@ export default function TopBar(props: TopBarProps) {
         >
           Typing Game
         </Typography>
-        <DarkModeToggle light={props.light} setLight={props.setLight} />
+        <DarkModeToggle />
       </Toolbar>
     </AppBar>
   );

@@ -1,14 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import { Word } from "../../types";
 import { RefObject, useRef, useEffect } from "react";
-import { TEXT_BOX_STYLE, getWordStyle } from "./styles";
+import { textBoxStyle, getWordStyle } from "./styles";
 
 interface TextBoxProps {
   currentWord: Word;
   wordList: Word[];
 }
 
-export default function TextBox({ currentWord, wordList }: TextBoxProps) {
+export function TextBox({ currentWord, wordList }: TextBoxProps) {
   const ref: RefObject<HTMLElement> = useRef(null);
   useEffect(
     () => ref.current?.scrollIntoView({ block: "start" }),
@@ -16,7 +16,7 @@ export default function TextBox({ currentWord, wordList }: TextBoxProps) {
   );
 
   return (
-    <Box sx={TEXT_BOX_STYLE}>
+    <Box sx={textBoxStyle}>
       {wordList.map((word) => (
         <Typography
           key={word.value}

@@ -1,4 +1,4 @@
-export const TEXT_BOX_STYLE = {
+export const textBoxStyle = {
   display: "flex",
   flexFlow: "column",
   flexWrap: "wrap",
@@ -8,15 +8,16 @@ export const TEXT_BOX_STYLE = {
   justifyContent: "space-between",
 };
 
-export const TITLE_STYLE = {
-  textAlign: "center",
-};
-
-export const RESULT_ROW_STYLE = {
+export const resultRowStyle = {
   display: "flex",
   gap: "1em",
 };
 
-export const RESULT_VALUE_STYLE = {
+export const titleStyle = {
+  ...resultRowStyle,
+  justifyContent: "center",
+};
+
+export const resultValueStyle = {
   fontWeight: "bold",
 };

@@ -1,1 +1,1 @@
-export const TIMER_STYLE = { display: "flex", alignItems: "center" };
+export const timerStyle = { display: "flex", alignItems: "center" };

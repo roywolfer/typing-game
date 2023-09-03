@@ -1,10 +1,8 @@
 import { Typography } from "@mui/material";
-import { TIMER_STYLE } from "./styles";
+import { timerStyle } from "./styles";
 import { useCountdownTimer } from "use-countdown-timer";
-import { GameContext } from "../../typingGame";
 import { useContext, useEffect } from "react";
-
-const COUNTDOWN_TIME = 1000 * 10;
+import { GameContext } from "../../game-context/gameContext";
 
 function formatCountdown(countdown: number): string {
   const minutes = Math.floor(countdown / (1000 * 60));
@@ -17,24 +15,27 @@ function addLeadingZero(time: number): string | number {
   return time.toString().length === 1 ? `0${time}` : time;
 }
 
-export default function Timer() {
-  const { gameState, setGameState } = useContext(GameContext);
+interface TimerProps {
+  countdownTime: number;
+  endGame: () => void;
+}
+
+export function Timer({ countdownTime, endGame }: TimerProps) {
+  const { gameState } = useContext(GameContext);
   const { countdown, start, reset } = useCountdownTimer({
-    timer: COUNTDOWN_TIME,
+    timer: countdownTime,
     resetOnExpire: false,
   });
 
   useEffect(() => {
     if (gameState === "starting") reset();
-    if (gameState === "playing" && countdown === COUNTDOWN_TIME) start();
-    if (gameState === "playing" && countdown === 0) {
-      setGameState("ended");
-    }
+    if (gameState === "playing" && countdown === countdownTime) start();
+    if (gameState === "playing" && countdown === 0) endGame();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countdown, gameState]);
 
   return (
-    <Typography variant="h4" sx={TIMER_STYLE}>
+    <Typography variant="h4" sx={timerStyle}>
       {formatCountdown(countdown)}
     </Typography>
   );

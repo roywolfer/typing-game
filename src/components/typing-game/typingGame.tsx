@@ -1,54 +1,53 @@
 import { Grid } from "@mui/material";
-import useWordListHook from "./hooks/useWordListHook";
-import { createContext, useCallback, useEffect, useState } from "react";
-import useWordHook from "./hooks/useWordHook";
-import TextBox from "./components/text-box/textBox";
-import TextInput from "./components/text-input/textInput";
-import RestartButton from "./components/restart-button/restartButton";
-import { GRID_GAP, TEXT_BOX_STYLE, TEXT_INPUT_STYLE } from "./styles";
-import Timer from "./components/timer/Timer";
-import { GameContextValue, GameState } from "./types";
-import GameResult from "./components/game-result/gameResult";
+import { useWordList } from "./hooks/useWordListHook";
+import { useCallback, useEffect, useState } from "react";
+import { useWord } from "./hooks/useWordHook";
+import { TextBox } from "./components/text-box/textBox";
+import { TextInput } from "./components/text-input/textInput";
+import { RestartButton } from "./components/restart-button/restartButton";
+import { textInputStyle, gridGap, textBoxStyle } from "./styles";
+import { Timer } from "./components/timer/Timer";
+import { GameState } from "./types";
+import { GameResult } from "./components/game-result/gameResult";
+import { GameProvider } from "./game-context/gameContext";
+import { COUNTDOWN_TIME } from "./consts";
 
-export const GameContext = createContext<GameContextValue>({
-  gameState: "starting",
-  setGameState: () => {},
-});
-
-export default function TypingGame() {
+export function TypingGame() {
   const [gameState, setGameState] = useState<GameState>("starting");
-  const [wordList, shuffleWordList] = useWordListHook();
-  const [currentWord, setWritten, nextWord, setWordList] =
-    useWordHook(wordList);
+  const { wordList, shuffleWordList } = useWordList();
+  const { currentWord, setWritten, nextWord, setWordList } = useWord(wordList);
+  const endGame = useCallback(() => {
+    setWritten("");
+    setGameState("ended");
+  }, [setGameState, setWritten]);
   const restartGame = useCallback(() => {
-    setGameState("starting");
     shuffleWordList();
+    setGameState("starting");
   }, [shuffleWordList]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setWordList(wordList), [wordList]);
 
   return (
-    <GameContext.Provider value={{ gameState, setGameState }}>
-      <Grid container gap={GRID_GAP}>
-        <Grid item xs={12} sx={TEXT_BOX_STYLE}>
-          <TextBox currentWord={currentWord} wordList={wordList} />
+    <GameProvider value={{ gameState, setGameState }}>
+      <Grid container gap={gridGap}>
+        <Grid item xs={12} sx={textBoxStyle}>
+          {gameState === "ended" ? (
+            <GameResult wordList={wordList} countdownTime={COUNTDOWN_TIME} />
+          ) : (
+            <TextBox currentWord={currentWord} wordList={wordList} />
+          )}
         </Grid>
-        <Grid item gap={GRID_GAP} xs={12} sx={TEXT_INPUT_STYLE}>
+        <Grid item gap={gridGap} xs={12} sx={textInputStyle}>
           <TextInput
             currentWord={currentWord}
             nextWord={nextWord}
             setWritten={setWritten}
           />
-          <Timer />
+          <Timer countdownTime={COUNTDOWN_TIME} endGame={endGame} />
           <RestartButton restartGame={restartGame} />
         </Grid>
-        {gameState === "starting" && (
-          <Grid item xs={12} sx={TEXT_BOX_STYLE}>
-            <GameResult />
-          </Grid>
-        )}
       </Grid>
-    </GameContext.Provider>
+    </GameProvider>
   );
 }
