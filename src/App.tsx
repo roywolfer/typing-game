@@ -4,6 +4,7 @@ import { TopBar } from "./components/top-bar/topBar";
 import { TypingGame } from "./components/typing-game/typingGame";
 import { DarkModeProvider } from "./components/dark-mode-context/darkModeContext";
 import { gameStyle, themeDark, themeLight } from "./styles";
+import { Scorboard } from "./components/scoreboard/scoreboard";
 
 export function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -17,6 +18,11 @@ export function App() {
         <Grid container spacing={1} sx={gameStyle}>
           <Grid item xs={12} md={8}>
             <TypingGame />
+          </Grid>
+        </Grid>
+        <Grid container spacing={1} sx={gameStyle}>
+          <Grid item xs={12} md={8}>
+            <Scorboard />
           </Grid>
         </Grid>
       </ThemeProvider>

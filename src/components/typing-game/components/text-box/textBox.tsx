@@ -11,7 +11,7 @@ interface TextBoxProps {
 export function TextBox({ currentWord, wordList }: TextBoxProps) {
   const ref: RefObject<HTMLElement> = useRef(null);
   useEffect(
-    () => ref.current?.scrollIntoView({ block: "start" }),
+    () => ref.current?.scrollIntoView({ block: "start", behavior: "smooth" }),
     [currentWord.value]
   );
 
