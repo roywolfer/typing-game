@@ -1,14 +1,14 @@
 import { Grid } from "@mui/material";
 import { useWordList } from "./hooks/wordList/useWordListHook";
 import { useCallback, useEffect, useState } from "react";
-import { TextBox } from "./components/text-box/textBox";
-import { TextInput } from "./components/text-input/textInput";
-import { RestartButton } from "./components/restart-button/restartButton";
+import { TextBox } from "./components/textBox/textBox";
+import { TextInput } from "./components/textInput/textInput";
+import { RestartButton } from "./components/restartButton/restartButton";
 import { textInputStyle, gridGap, textBoxStyle } from "./styles";
 import { TimeDisplay } from "./components/timeDisplay/timeDisplay";
 import { GameState } from "./types";
-import { GameResult } from "./components/game-result/gameResult";
-import { GameProvider } from "./game-context/gameContext";
+import { GameResult } from "./components/gameResult/gameResult";
+import { GameProvider } from "./gameContext/gameContext";
 import { COUNTDOWN_TIME } from "./consts";
 import { useCountdownTimer } from "use-countdown-timer";
 

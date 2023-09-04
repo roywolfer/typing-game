@@ -1,8 +1,8 @@
 import { CssBaseline, Grid, ThemeProvider } from "@mui/material";
 import { useState } from "react";
-import { TopBar } from "./components/top-bar/topBar";
-import { TypingGame } from "./components/typing-game/typingGame";
-import { DarkModeProvider } from "./components/dark-mode-context/darkModeContext";
+import { TopBar } from "./components/topBar/topBar";
+import { TypingGame } from "./components/typingGame/typingGame";
+import { DarkModeProvider } from "./components/darkModeContext/darkModeContext";
 import { gameStyle, themeDark, themeLight } from "./styles";
 
 export function App() {

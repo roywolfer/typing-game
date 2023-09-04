@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { Word } from "../../types";
 import { useCallback, ChangeEvent, useContext } from "react";
-import { GameContext } from "../../game-context/gameContext";
+import { GameContext } from "../../gameContext/gameContext";
 import { textInputStyle } from "./styles";
 
 interface TextInputProps {

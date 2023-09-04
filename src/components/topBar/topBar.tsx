@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography, Icon, Box } from "@mui/material";
 import Logo from "../../../assets/keyboard.svg";
-import { DarkModeToggle } from "./components/dark-mode-toggle/darkModeToggle";
+import { DarkModeToggle } from "./components/darkModeToggle/darkModeToggle";
 import {
   appBarStyle,
   logoContainerStyle,
