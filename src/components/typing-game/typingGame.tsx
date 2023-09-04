@@ -1,32 +1,48 @@
 import { Grid } from "@mui/material";
-import { useWordList } from "./hooks/useWordListHook";
+import { useWordList } from "./hooks/wordList/useWordListHook";
 import { useCallback, useEffect, useState } from "react";
-import { useWord } from "./hooks/useWordHook";
 import { TextBox } from "./components/text-box/textBox";
 import { TextInput } from "./components/text-input/textInput";
 import { RestartButton } from "./components/restart-button/restartButton";
 import { textInputStyle, gridGap, textBoxStyle } from "./styles";
-import { Timer } from "./components/timer/Timer";
+import { TimeDisplay } from "./components/timeDisplay/timeDisplay";
 import { GameState } from "./types";
 import { GameResult } from "./components/game-result/gameResult";
 import { GameProvider } from "./game-context/gameContext";
 import { COUNTDOWN_TIME } from "./consts";
+import { useCountdownTimer } from "use-countdown-timer";
 
 export function TypingGame() {
   const [gameState, setGameState] = useState<GameState>("starting");
-  const { wordList, shuffleWordList } = useWordList();
-  const { currentWord, setWritten, nextWord, setWordList } = useWord(wordList);
-  const endGame = useCallback(() => {
-    setWritten("");
-    setGameState("ended");
-  }, [setGameState, setWritten]);
-  const restartGame = useCallback(() => {
-    shuffleWordList();
-    setGameState("starting");
-  }, [shuffleWordList]);
+  const {
+    wordList,
+    shuffleWordList,
+    currentWord,
+    nextWord,
+    setCurrentWritten,
+  } = useWordList();
+  const { countdown, start, reset } = useCountdownTimer({
+    timer: COUNTDOWN_TIME,
+    resetOnExpire: false,
+  });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setWordList(wordList), [wordList]);
+  const startGame = useCallback(() => {
+    start();
+    setGameState("playing");
+  }, [start]);
+  const endGame = useCallback(() => {
+    setCurrentWritten("");
+    setGameState("ended");
+  }, [setCurrentWritten]);
+  const resetGame = useCallback(() => {
+    shuffleWordList();
+    reset();
+    setGameState("starting");
+  }, [reset, shuffleWordList]);
+
+  useEffect(() => {
+    if (gameState === "playing" && countdown === 0) endGame();
+  }, [countdown, endGame, gameState]);
 
   return (
     <GameProvider value={{ gameState, setGameState }}>
@@ -42,10 +58,11 @@ export function TypingGame() {
           <TextInput
             currentWord={currentWord}
             nextWord={nextWord}
-            setWritten={setWritten}
+            setWritten={setCurrentWritten}
+            startGame={startGame}
           />
-          <Timer countdownTime={COUNTDOWN_TIME} endGame={endGame} />
-          <RestartButton restartGame={restartGame} />
+          <TimeDisplay time={countdown} />
+          <RestartButton restartGame={resetGame} />
         </Grid>
       </Grid>
     </GameProvider>

@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, PropsWithChildren } from "react";
 import { GameProviderValue } from "./types";
 
 export const GameContext = createContext<GameProviderValue>({
@@ -7,10 +7,12 @@ export const GameContext = createContext<GameProviderValue>({
 });
 
 interface GameProviderProps {
-  children: ReactNode;
   value: GameProviderValue;
 }
 
-export function GameProvider({ children, value }: GameProviderProps) {
+export function GameProvider({
+  children,
+  value,
+}: PropsWithChildren<GameProviderProps>) {
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }

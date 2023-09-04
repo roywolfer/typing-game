@@ -14,7 +14,7 @@ export function App() {
       <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
         <CssBaseline />
         <TopBar />
-        <Grid container spacing={1} sx={gameStyle}>
+        <Grid container spacing={2} sx={gameStyle}>
           <Grid item xs={12} md={8}>
             <TypingGame />
           </Grid>

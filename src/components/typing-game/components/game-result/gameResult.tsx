@@ -1,5 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import {
+  correctStyle,
+  inParenthesesStyle,
+  incorrectStyle,
   resultRowStyle,
   resultValueStyle,
   textBoxStyle,
@@ -7,46 +10,13 @@ import {
 } from "./styles";
 import { Word } from "../../types";
 import { useMemo } from "react";
-import { GameStats } from "./types";
-
-function countCorrectLetters(word: Word) {
-  const wordLength = Math.max(word.value.length, word.written.length);
-  let correctCount = 0;
-
-  for (let i = 0; i < wordLength; i++) {
-    if (word.value[i] !== word.written[i]) continue;
-
-    correctCount++;
-  }
-
-  return correctCount;
-}
-
-function getGameStats(wordList: Word[]): GameStats {
-  let correctWords = 0;
-  let incorrectWords = 0;
-  let correctLetters = 0;
-  let incorrectLetters = 0;
-
-  wordList.every((word) => {
-    if (!word.written) return false;
-
-    if (word.value === word.written) {
-      correctLetters += word.value.length;
-      correctWords++;
-    } else {
-      const correctLettersInWord = countCorrectLetters(word);
-
-      correctLetters += correctLettersInWord;
-      incorrectLetters += word.written.length - correctLettersInWord;
-      incorrectWords++;
-    }
-
-    return true;
-  });
-
-  return { correctWords, incorrectWords, correctLetters, incorrectLetters };
-}
+import { getGameStats } from "./utils";
+import {
+  lettersTypedString,
+  correctWordsString,
+  incorrectWordsString,
+  wpmString,
+} from "./strings";
 
 interface GameResultProps {
   wordList: Word[];
@@ -63,39 +33,40 @@ export function GameResult({ wordList, countdownTime }: GameResultProps) {
   return (
     <Box sx={textBoxStyle}>
       <Box sx={titleStyle}>
-        <Typography variant="h4" color="primary">
-          WPM:
-        </Typography>
-        <Typography variant="h4" color="primary" sx={resultValueStyle}>
+        <Typography variant="h4">{wpmString}</Typography>
+        <Typography variant="h4" sx={resultValueStyle}>
           {wpm}
         </Typography>
       </Box>
       <Box sx={resultRowStyle}>
-        <Typography variant="h5">Letters typed:</Typography>
+        <Typography variant="h5">{lettersTypedString}</Typography>
         <Typography variant="h5" sx={resultValueStyle}>
           {correctLetters + incorrectLetters}
         </Typography>
         <Typography variant="h5" sx={resultValueStyle}>
           (
-          <Box display="inline" color="green">
+          <Box sx={{ ...inParenthesesStyle, ...correctStyle }}>
             {correctLetters}
           </Box>{" "}
           |{" "}
-          <Box display="inline" color="red">
+          <Box sx={{ ...inParenthesesStyle, ...incorrectStyle }}>
             {incorrectLetters}
           </Box>
           )
         </Typography>
       </Box>
       <Box sx={resultRowStyle}>
-        <Typography variant="h5">Words typed correctly:</Typography>
-        <Typography variant="h5" color="green" sx={resultValueStyle}>
+        <Typography variant="h5">{correctWordsString}</Typography>
+        <Typography variant="h5" sx={{ ...resultValueStyle, ...correctStyle }}>
           {correctWords}
         </Typography>
       </Box>
       <Box sx={resultRowStyle}>
-        <Typography variant="h5">Words typed incorrectly:</Typography>
-        <Typography variant="h5" color="red" sx={resultValueStyle}>
+        <Typography variant="h5">{incorrectWordsString}</Typography>
+        <Typography
+          variant="h5"
+          sx={{ ...resultValueStyle, ...incorrectStyle }}
+        >
           {incorrectWords}
         </Typography>
       </Box>

@@ -16,7 +16,11 @@ export const themeDark = createTheme({
 });
 
 export const gameStyle = {
-  m: "10vh",
+  paddingBottom: 2,
+  paddingRight: 2,
+  marginTop: 2,
+  marginLeft: "auto",
+  marginRight: "auto",
   width: "auto",
-  justifyContent: "space-around",
+  justifyContent: "center",
 };

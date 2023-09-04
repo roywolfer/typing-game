@@ -1,3 +1,1 @@
-export const textInputStyle = {
-  ".MuiInputBase-input": { fontSize: "1.25rem", fontWeight: 500 },
-};
+export const textInputStyle = { fontSize: "1.25rem", fontWeight: 500 };

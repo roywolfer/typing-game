@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import { Word } from "../../types";
 import { RefObject, useRef, useEffect } from "react";
-import { textBoxStyle, getWordStyle } from "./styles";
+import { textBoxStyle } from "./styles";
+import { getWordStyle } from "./utils";
 
 interface TextBoxProps {
   currentWord: Word;

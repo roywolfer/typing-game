@@ -1,21 +1,23 @@
-import { AppBar, Toolbar, Typography, Icon } from "@mui/material";
+import { AppBar, Toolbar, Typography, Icon, Box } from "@mui/material";
 import Logo from "../../../assets/keyboard.svg";
 import { DarkModeToggle } from "./components/dark-mode-toggle/darkModeToggle";
+import {
+  appBarStyle,
+  logoContainerStyle,
+  logoStyle,
+  titleStyle,
+} from "./styles";
+import { title } from "./strings";
 
 export function TopBar() {
   return (
-    <AppBar position="static" color="inherit" sx={{ display: "flex" }}>
+    <AppBar sx={appBarStyle}>
       <Toolbar variant="dense">
-        <Icon sx={{ mr: 2 }}>
-          <img src={Logo} height={25} width={25} />
+        <Icon sx={logoContainerStyle}>
+          <Box component="img" src={Logo} sx={logoStyle} />
         </Icon>
-        <Typography
-          variant="h6"
-          color="inherit"
-          component="div"
-          sx={{ flexGrow: 1 }}
-        >
-          Typing Game
+        <Typography variant="h6" component="div" sx={titleStyle}>
+          {title}
         </Typography>
         <DarkModeToggle />
       </Toolbar>
