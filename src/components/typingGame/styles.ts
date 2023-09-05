@@ -1,5 +1,10 @@
-export const gridGap = { xs: 1, md: 2 };
+import { SystemStyleObject } from "@mui/system";
 
-export const textBoxStyle = { border: "1px solid", borderRadius: "4px" };
+export const gridGap: SystemStyleObject = { xs: 1, md: 2 };
 
-export const textInputStyle = { display: "flex" };
+export const textBoxStyle: SystemStyleObject = {
+  border: "1px solid",
+  borderRadius: "4px",
+};
+
+export const textInputStyle: SystemStyleObject = { display: "flex" };

@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import { SystemStyleObject } from "@mui/system";
 
 export const themeLight = createTheme({
   palette: {
@@ -15,7 +16,7 @@ export const themeDark = createTheme({
   },
 });
 
-export const gameStyle = {
+export const gameStyle: SystemStyleObject = {
   paddingBottom: 2,
   paddingRight: 2,
   marginTop: 2,

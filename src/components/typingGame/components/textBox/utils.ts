@@ -1,9 +1,8 @@
-import { Theme } from "@emotion/react";
-import { SxProps } from "@mui/material";
 import { Word } from "../../types";
 import { defaultWordStyle } from "./styles";
+import { SystemStyleObject } from "@mui/system";
 
-export function getWordStyle(word: Word, currentWord: Word): SxProps<Theme> {
+export function getWordStyle(word: Word, currentWord: Word): SystemStyleObject {
   return {
     ...defaultWordStyle,
     backgroundColor: getBackgroundColor(word, currentWord),

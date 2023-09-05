@@ -1,4 +1,6 @@
-export const textBoxStyle = {
+import { SystemStyleObject } from "@mui/system";
+
+export const textBoxStyle: SystemStyleObject = {
   display: "flex",
   flexFlow: "column",
   flexWrap: "wrap",
@@ -8,29 +10,29 @@ export const textBoxStyle = {
   justifyContent: "space-between",
 };
 
-export const resultRowStyle = {
+export const resultRowStyle: SystemStyleObject = {
   display: "flex",
   gap: "1em",
 };
 
-export const titleStyle = {
+export const titleStyle: SystemStyleObject = {
   ...resultRowStyle,
   justifyContent: "center",
   color: "primary.main",
 };
 
-export const resultValueStyle = {
+export const resultValueStyle: SystemStyleObject = {
   fontWeight: "bold",
 };
 
-export const correctStyle = {
+export const correctStyle: SystemStyleObject = {
   color: "green",
 };
 
-export const incorrectStyle = {
+export const incorrectStyle: SystemStyleObject = {
   color: "red",
 };
 
-export const inParenthesesStyle = {
+export const inParenthesesStyle: SystemStyleObject = {
   display: "inline",
 };

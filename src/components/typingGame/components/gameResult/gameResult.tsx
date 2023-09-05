@@ -44,12 +44,8 @@ export function GameResult({ wordList, countdownTime }: GameResultProps) {
           {correctLetters + incorrectLetters}
         </Typography>
         <Typography variant="h5" sx={resultValueStyle}>
-          (
-          <Box sx={{ ...inParenthesesStyle, ...correctStyle }}>
-            {correctLetters}
-          </Box>{" "}
-          |{" "}
-          <Box sx={{ ...inParenthesesStyle, ...incorrectStyle }}>
+          (<Box sx={[inParenthesesStyle, correctStyle]}>{correctLetters}</Box> |{" "}
+          <Box sx={[inParenthesesStyle, incorrectStyle]}>
             {incorrectLetters}
           </Box>
           )
@@ -57,16 +53,13 @@ export function GameResult({ wordList, countdownTime }: GameResultProps) {
       </Box>
       <Box sx={resultRowStyle}>
         <Typography variant="h5">{correctWordsString}</Typography>
-        <Typography variant="h5" sx={{ ...resultValueStyle, ...correctStyle }}>
+        <Typography variant="h5" sx={[resultValueStyle, correctStyle]}>
           {correctWords}
         </Typography>
       </Box>
       <Box sx={resultRowStyle}>
         <Typography variant="h5">{incorrectWordsString}</Typography>
-        <Typography
-          variant="h5"
-          sx={{ ...resultValueStyle, ...incorrectStyle }}
-        >
+        <Typography variant="h5" sx={[resultValueStyle, incorrectStyle]}>
           {incorrectWords}
         </Typography>
       </Box>

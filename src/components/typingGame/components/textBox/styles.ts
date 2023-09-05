@@ -1,4 +1,6 @@
-export const textBoxStyle = {
+import { SystemStyleObject } from "@mui/system";
+
+export const textBoxStyle: SystemStyleObject = {
   display: "flex",
   flexWrap: "wrap",
   height: "5em",
@@ -7,7 +9,7 @@ export const textBoxStyle = {
   justifyContent: "space-between",
 };
 
-export const defaultWordStyle = {
+export const defaultWordStyle: SystemStyleObject = {
   height: "2em",
   borderRadius: "4px",
   lineHeight: "2em",

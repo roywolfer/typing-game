@@ -1,1 +1,6 @@
-export const timeDisplayStyle = { display: "flex", alignItems: "center" };
+import { SystemStyleObject } from "@mui/system";
+
+export const timeDisplayStyle: SystemStyleObject = {
+  display: "flex",
+  alignItems: "center",
+};
