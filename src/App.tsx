@@ -1,8 +1,8 @@
 import { CssBaseline, Grid, ThemeProvider } from "@mui/material";
 import { useState } from "react";
-import { TopBar } from "./components/top-bar/topBar";
-import { TypingGame } from "./components/typing-game/typingGame";
-import { DarkModeProvider } from "./components/dark-mode-context/darkModeContext";
+import { TopBar } from "./components/topBar/topBar";
+import { TypingGame } from "./components/typingGame/typingGame";
+import { DarkModeProvider } from "./components/darkModeContext/darkModeContext";
 import { gameStyle, themeDark, themeLight } from "./styles";
 import { Scorboard } from "./components/scoreboard/scoreboard";
 
@@ -15,7 +15,7 @@ export function App() {
       <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
         <CssBaseline />
         <TopBar />
-        <Grid container spacing={1} sx={gameStyle}>
+        <Grid container spacing={2} sx={gameStyle}>
           <Grid item xs={12} md={8}>
             <TypingGame />
           </Grid>
