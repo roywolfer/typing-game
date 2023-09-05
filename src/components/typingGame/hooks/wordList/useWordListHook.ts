@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Word } from "../../types";
-import { WORDS } from "../../consts";
+import { words } from "../../consts";
 import { shuffle } from "./utils";
 
 interface WordListHook {
@@ -37,5 +37,5 @@ export function useWordList(): WordListHook {
 }
 
 function getNewWordList(): Word[] {
-  return shuffle([...WORDS]).map((word) => ({ value: word, written: "" }));
+  return shuffle([...words]).map((word) => ({ value: word, written: "" }));
 }

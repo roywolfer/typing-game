@@ -1,6 +1,6 @@
-export const COUNTDOWN_TIME = 1000 * 60;
+export const countdownTime = 1000 * 60;
 
-export const WORDS = [
+export const words = [
   "about",
   "above",
   "add",

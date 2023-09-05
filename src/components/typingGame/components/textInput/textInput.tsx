@@ -1,27 +1,26 @@
 import { TextField } from "@mui/material";
 import { Word } from "../../types";
-import { useCallback, ChangeEvent, useContext } from "react";
-import { GameContext } from "../../gameContext/gameContext";
+import { useCallback, ChangeEvent, Dispatch, SetStateAction } from "react";
 import { textInputStyle } from "./styles";
 
 interface TextInputProps {
   currentWord: Word;
   nextWord: () => void;
   setWritten: (written: string) => void;
-  startGame: () => void;
+  setDidStartTyping: Dispatch<SetStateAction<boolean>>;
+  disabled: boolean;
 }
 
 export function TextInput({
   currentWord,
   nextWord,
   setWritten,
-  startGame,
+  setDidStartTyping,
+  disabled,
 }: TextInputProps) {
-  const { gameState } = useContext(GameContext);
   const updateWritten = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      if (gameState === "starting") startGame();
-
+      setDidStartTyping(true);
       const value = event.target.value;
       const trimmedValue = value.trim();
 
@@ -35,7 +34,7 @@ export function TextInput({
 
       setWritten(value);
     },
-    [gameState, startGame, currentWord, setWritten, nextWord]
+    [currentWord.written, nextWord, setDidStartTyping, setWritten]
   );
 
   return (
@@ -43,7 +42,7 @@ export function TextInput({
       fullWidth
       value={currentWord.written}
       onChange={updateWritten}
-      disabled={gameState === "ended"}
+      disabled={disabled}
       inputProps={{ style: textInputStyle }}
     />
   );
