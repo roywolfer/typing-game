@@ -2,14 +2,14 @@ import { maxScoreAmount } from "./consts";
 import { Score } from "./types";
 
 export function getNewTopScores(topScores: Score[], newScore: number): Score[] {
-  return [...topScores, { score: newScore, date: new Date() }]
-    .sort((a, b) => b.score - a.score)
+  return [...topScores, { points: newScore, date: new Date() }]
+    .sort((a, b) => b.points - a.points)
     .slice(0, maxScoreAmount);
 }
 
 export function readScoresFromLocalStorage(key: string): Score[] {
   return readArrayFromLocalStorage<Score>(key).map((score) => ({
-    score: score.score,
+    points: score.points,
     date: new Date(score.date),
   }));
 }

@@ -1,4 +1,4 @@
 export interface Score {
-  score: number;
+  points: number;
   date: Date;
 }
