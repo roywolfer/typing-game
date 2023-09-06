@@ -1,6 +1,6 @@
 import { ICountdownTimerParams } from "use-countdown-timer";
 
-export const countdownTime = 1000 * 60;
+export const countdownTime = 1000 * 5;
 
 export const countdownParams: ICountdownTimerParams = {
   timer: countdownTime,

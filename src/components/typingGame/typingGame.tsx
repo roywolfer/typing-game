@@ -56,7 +56,7 @@ export function TypingGame({ updateTopScores }: TypingGameProps) {
 
   return (
     <Grid container sx={gridGap}>
-      <Grid item sx={textBoxStyle}>
+      <Grid item xs={12} sx={textBoxStyle}>
         {gameStats ? (
           <GameResult gameStats={gameStats} />
         ) : (

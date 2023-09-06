@@ -1,6 +1,7 @@
 import { countdownTime } from "../../consts";
 import { Word } from "../../types";
 import { GameStats } from "./types";
+import { oneMinute } from "./consts";
 
 export function getGameStats(wordList: Word[]): GameStats {
   let correctWords = 0;
@@ -47,5 +48,5 @@ function countCorrectLetters(word: Word) {
 }
 
 function calculateWPM(correctWords: number, countdownTime: number): number {
-  return correctWords / (countdownTime / (1000 * 60));
+  return correctWords / (countdownTime / oneMinute);
 }
