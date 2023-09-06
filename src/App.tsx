@@ -5,8 +5,10 @@ import { TypingGame } from "./components/typingGame/typingGame";
 import { DarkModeProvider } from "./components/darkModeContext/darkModeContext";
 import { gameStyle, themeDark, themeLight } from "./styles";
 import { Scorboard } from "./components/scoreboard/scoreboard";
+import { useTopScores } from "./components/scoreboard/hooks/topScores/useTopScores";
 
 export function App() {
+  const { topScores, updateTopScores } = useTopScores();
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const toggleTheme = () => setIsDarkTheme(!isDarkTheme);
 
@@ -17,12 +19,12 @@ export function App() {
         <TopBar />
         <Grid container spacing={2} sx={gameStyle}>
           <Grid item xs={12} md={8}>
-            <TypingGame />
+            <TypingGame updateTopScores={updateTopScores} />
           </Grid>
         </Grid>
-        <Grid container spacing={1} sx={gameStyle}>
+        <Grid container spacing={2} sx={gameStyle}>
           <Grid item xs={12} md={8}>
-            <Scorboard />
+            <Scorboard topScores={topScores} />
           </Grid>
         </Grid>
       </ThemeProvider>

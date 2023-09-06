@@ -1,3 +1,4 @@
+import { countdownTime } from "../../consts";
 import { Word } from "../../types";
 import { GameStats } from "./types";
 
@@ -25,7 +26,13 @@ export function getGameStats(wordList: Word[]): GameStats {
     return true;
   });
 
-  return { correctWords, incorrectWords, correctLetters, incorrectLetters };
+  return {
+    wpm: calculateWPM(correctWords, countdownTime),
+    correctWords,
+    incorrectWords,
+    correctLetters,
+    incorrectLetters,
+  };
 }
 
 function countCorrectLetters(word: Word) {
@@ -37,4 +44,8 @@ function countCorrectLetters(word: Word) {
   }
 
   return correctCount;
+}
+
+function calculateWPM(correctWords: number, countdownTime: number): number {
+  return correctWords / (countdownTime / (1000 * 60));
 }

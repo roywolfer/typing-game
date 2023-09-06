@@ -8,45 +8,40 @@ import {
   textBoxStyle,
   titleStyle,
 } from "./styles";
-import { Word } from "../../types";
-import { useMemo } from "react";
-import { getGameStats } from "./utils";
 import {
   lettersTypedString,
   correctWordsString,
   incorrectWordsString,
   wpmString,
 } from "./strings";
+import { GameStats } from "./types";
 
 interface GameResultProps {
-  wordList: Word[];
-  countdownTime: number;
+  gameStats: GameStats;
 }
 
-export function GameResult({ wordList, countdownTime }: GameResultProps) {
-  const { correctWords, incorrectWords, correctLetters, incorrectLetters } =
-    useMemo(() => getGameStats(wordList), [wordList]);
-  const wpm = useMemo(() => {
-    return correctWords / (countdownTime / (1000 * 60));
-  }, [countdownTime, correctWords]);
-
+export function GameResult({ gameStats }: GameResultProps) {
   return (
     <Box sx={textBoxStyle}>
       <Box sx={titleStyle}>
         <Typography variant="h4">{wpmString}</Typography>
         <Typography variant="h4" sx={resultValueStyle}>
-          {wpm}
+          {gameStats.wpm}
         </Typography>
       </Box>
       <Box sx={resultRowStyle}>
         <Typography variant="h5">{lettersTypedString}</Typography>
         <Typography variant="h5" sx={resultValueStyle}>
-          {correctLetters + incorrectLetters}
+          {gameStats.correctLetters + gameStats.incorrectLetters}
         </Typography>
         <Typography variant="h5" sx={resultValueStyle}>
-          (<Box sx={[inParenthesesStyle, correctStyle]}>{correctLetters}</Box> |{" "}
+          (
+          <Box sx={[inParenthesesStyle, correctStyle]}>
+            {gameStats.correctLetters}
+          </Box>{" "}
+          |{" "}
           <Box sx={[inParenthesesStyle, incorrectStyle]}>
-            {incorrectLetters}
+            {gameStats.incorrectLetters}
           </Box>
           )
         </Typography>
@@ -54,13 +49,13 @@ export function GameResult({ wordList, countdownTime }: GameResultProps) {
       <Box sx={resultRowStyle}>
         <Typography variant="h5">{correctWordsString}</Typography>
         <Typography variant="h5" sx={[resultValueStyle, correctStyle]}>
-          {correctWords}
+          {gameStats.correctWords}
         </Typography>
       </Box>
       <Box sx={resultRowStyle}>
         <Typography variant="h5">{incorrectWordsString}</Typography>
         <Typography variant="h5" sx={[resultValueStyle, incorrectStyle]}>
-          {incorrectWords}
+          {gameStats.incorrectWords}
         </Typography>
       </Box>
     </Box>
