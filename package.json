@@ -19,6 +19,7 @@
     "javascript-time-ago": "^2.5.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "use-countdown-timer": "^1.3.2"
   },
   "devDependencies": {

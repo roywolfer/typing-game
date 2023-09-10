@@ -1,14 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { ScoreboardRow } from "./types";
 import { useMemo } from "react";
-import { Score } from "./hooks/topScores/types";
 import { columnDefinitions } from "./consts";
+import { useTopScores } from "../../hooks/topScores/useTopScores";
 
-interface ScoreboardProps {
-  topScores: Score[];
-}
-
-export function Scorboard({ topScores }: ScoreboardProps) {
+export function Scorboard() {
+  const { topScores } = useTopScores();
   const rows: ScoreboardRow[] = useMemo(
     () =>
       topScores.map((score, index) => ({

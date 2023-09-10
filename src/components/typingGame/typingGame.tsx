@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { useWordList } from "./hooks/wordList/useWordListHook";
+import { useWordList } from "../../hooks/wordList/useWordListHook";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { TextBox } from "./components/textBox/textBox";
 import { TextInput } from "./components/textInput/textInput";
@@ -11,12 +11,10 @@ import { countdownParams } from "./consts";
 import { useCountdownTimer } from "use-countdown-timer";
 import { getGameStats } from "./components/gameResult/utils";
 import { GameStats } from "./components/gameResult/types";
+import { useTopScores } from "../../hooks/topScores/useTopScores";
 
-interface TypingGameProps {
-  updateTopScores: (score: number) => void;
-}
-
-export function TypingGame({ updateTopScores }: TypingGameProps) {
+export function TypingGame() {
+  const { updateTopScores } = useTopScores();
   const [didStartTyping, setDidStartTyping] = useState<boolean>(false);
   const [isInputDisabled, setIsInputDisabled] = useState<boolean>(false);
   const { countdown, start, reset } = useCountdownTimer(countdownParams);
