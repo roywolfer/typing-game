@@ -6,9 +6,10 @@ import { DarkModeContext } from "../../../darkModeContext/darkModeContext";
 
 export function DarkModeToggle() {
   const { isDarkTheme, toggleTheme } = useContext(DarkModeContext);
+  const darkModeToggleTitle = `Turn ${isDarkTheme ? "on" : "off"} the light`;
 
   return (
-    <Tooltip title={`Turn ${isDarkTheme ? "on" : "off"} the light`}>
+    <Tooltip title={darkModeToggleTitle}>
       <IconButton color="inherit" onClick={toggleTheme}>
         {isDarkTheme ? <DarkModeIcon /> : <LightModeIcon />}
       </IconButton>

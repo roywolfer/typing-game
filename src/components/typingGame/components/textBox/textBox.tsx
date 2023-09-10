@@ -3,6 +3,7 @@ import { Word } from "../../types";
 import { RefObject, useRef, useEffect } from "react";
 import { textBoxStyle } from "./styles";
 import { getWordStyle } from "./utils";
+import { scrollOptions } from "./consts";
 
 interface TextBoxProps {
   currentWord: Word;
@@ -12,7 +13,7 @@ interface TextBoxProps {
 export function TextBox({ currentWord, wordList }: TextBoxProps) {
   const ref: RefObject<HTMLElement> = useRef(null);
   useEffect(
-    () => ref.current?.scrollIntoView({ block: "start" }),
+    () => ref.current?.scrollIntoView(scrollOptions),
     [currentWord.value]
   );
 

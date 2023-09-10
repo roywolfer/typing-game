@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, PropsWithChildren } from "react";
 import { DarkModeProviderValue } from "./types";
 
 export const DarkModeContext = createContext<DarkModeProviderValue>({
@@ -7,11 +7,13 @@ export const DarkModeContext = createContext<DarkModeProviderValue>({
 });
 
 interface DarkModeProviderProps {
-  children: ReactNode;
   value: DarkModeProviderValue;
 }
 
-export function DarkModeProvider({ children, value }: DarkModeProviderProps) {
+export function DarkModeProvider({
+  children,
+  value,
+}: PropsWithChildren<DarkModeProviderProps>) {
   return (
     <DarkModeContext.Provider value={value}>
       {children}

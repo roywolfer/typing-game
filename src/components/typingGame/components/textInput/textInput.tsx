@@ -43,7 +43,7 @@ export function TextInput({
       value={currentWord.written}
       onChange={updateWritten}
       disabled={disabled}
-      inputProps={{ style: textInputStyle }}
+      inputProps={textInputStyle}
     />
   );
 }

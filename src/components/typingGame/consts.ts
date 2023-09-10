@@ -1,4 +1,11 @@
-export const countdownTime = 1000 * 60;
+import { ICountdownTimerParams } from "use-countdown-timer";
+
+export const countdownTime = 1000 * 5;
+
+export const countdownParams: ICountdownTimerParams = {
+  timer: countdownTime,
+  resetOnExpire: false,
+};
 
 export const words = [
   "about",

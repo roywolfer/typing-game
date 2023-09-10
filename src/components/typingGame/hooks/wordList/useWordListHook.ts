@@ -14,6 +14,12 @@ interface WordListHook {
 export function useWordList(): WordListHook {
   const [wordList, setWordList] = useState(getNewWordList());
   const [wordIndex, setWordIndex] = useState(0);
+
+  const shuffleWordList = useCallback(() => {
+    setWordList(getNewWordList());
+    setWordIndex(0);
+  }, []);
+  const nextWord = useCallback(() => setWordIndex(wordIndex + 1), [wordIndex]);
   const setCurrentWritten = useCallback(
     (written: string) =>
       setWordList([
@@ -26,12 +32,9 @@ export function useWordList(): WordListHook {
 
   return {
     wordList,
-    shuffleWordList: () => {
-      setWordList(getNewWordList());
-      setWordIndex(0);
-    },
+    shuffleWordList,
     currentWord: wordList[wordIndex],
-    nextWord: () => setWordIndex(wordIndex + 1),
+    nextWord,
     setCurrentWritten,
   };
 }

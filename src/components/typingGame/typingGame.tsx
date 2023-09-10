@@ -1,22 +1,25 @@
 import { Grid } from "@mui/material";
 import { useWordList } from "./hooks/wordList/useWordListHook";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { TextBox } from "./components/textBox/textBox";
 import { TextInput } from "./components/textInput/textInput";
 import { ResetButton } from "./components/resetButton/restartButton";
 import { textInputStyle, gridGap, textBoxStyle } from "./styles";
 import { TimeDisplay } from "./components/timeDisplay/timeDisplay";
 import { GameResult } from "./components/gameResult/gameResult";
-import { countdownTime } from "./consts";
+import { countdownParams } from "./consts";
 import { useCountdownTimer } from "use-countdown-timer";
+import { getGameStats } from "./components/gameResult/utils";
+import { GameStats } from "./components/gameResult/types";
 
-export function TypingGame() {
+interface TypingGameProps {
+  updateTopScores: (score: number) => void;
+}
+
+export function TypingGame({ updateTopScores }: TypingGameProps) {
   const [didStartTyping, setDidStartTyping] = useState<boolean>(false);
   const [isInputDisabled, setIsInputDisabled] = useState<boolean>(false);
-  const { countdown, start, reset } = useCountdownTimer({
-    timer: countdownTime,
-    resetOnExpire: false,
-  });
+  const { countdown, start, reset } = useCountdownTimer(countdownParams);
   const {
     wordList,
     shuffleWordList,
@@ -24,38 +27,43 @@ export function TypingGame() {
     nextWord,
     setCurrentWritten,
   } = useWordList();
+  const gameStats = useMemo<GameStats | undefined>(
+    () => (countdown === 0 ? getGameStats(wordList) : undefined),
+    [countdown, wordList]
+  );
 
-  const startGame = useCallback(() => {
-    start();
-  }, [start]);
   const endGame = useCallback(() => {
     setCurrentWritten("");
     setIsInputDisabled(true);
-  }, [setCurrentWritten]);
+
+    if (gameStats?.wpm) updateTopScores(gameStats.wpm);
+  }, [gameStats?.wpm, setCurrentWritten, updateTopScores]);
   const resetGame = useCallback(() => {
     shuffleWordList();
     reset();
     setIsInputDisabled(false);
+    setDidStartTyping(false);
   }, [reset, shuffleWordList]);
 
   useEffect(() => {
-    if (didStartTyping) startGame();
-  }, [didStartTyping, startGame]);
+    if (didStartTyping) start();
+  }, [didStartTyping, start]);
 
   useEffect(() => {
     if (countdown === 0) endGame();
-  }, [countdown, endGame]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countdown]);
 
   return (
-    <Grid container gap={gridGap}>
+    <Grid container sx={gridGap}>
       <Grid item xs={12} sx={textBoxStyle}>
-        {countdown === 0 ? (
-          <GameResult wordList={wordList} countdownTime={countdownTime} />
+        {gameStats ? (
+          <GameResult gameStats={gameStats} />
         ) : (
           <TextBox currentWord={currentWord} wordList={wordList} />
         )}
       </Grid>
-      <Grid item gap={gridGap} xs={12} sx={textInputStyle}>
+      <Grid item xs={12} sx={[textInputStyle, gridGap]}>
         <TextInput
           currentWord={currentWord}
           nextWord={nextWord}

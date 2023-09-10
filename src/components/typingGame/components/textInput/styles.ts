@@ -1,6 +1,8 @@
-import { CSSProperties } from "react";
+import { InputBaseComponentProps } from "@mui/material";
 
-export const textInputStyle: CSSProperties = {
-  fontSize: "1.25rem",
-  fontWeight: 500,
+export const textInputStyle: InputBaseComponentProps = {
+  style: {
+    fontSize: "1.25rem",
+    fontWeight: 500,
+  },
 };
