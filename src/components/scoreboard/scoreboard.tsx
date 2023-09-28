@@ -2,30 +2,44 @@ import { DataGrid } from "@mui/x-data-grid";
 import { ScoreboardRow } from "./types";
 import { useMemo } from "react";
 import { columnDefinitions } from "./consts";
-import { useTopScores } from "../../hooks/topScores/useTopScores";
+import { convertToRows } from "./utils";
+import { useGetTopScores } from "../../hooks/topScores/useGetTopScores";
+import { LinearProgress } from "@mui/material";
+import { NoRowsOverlay } from "./components/noRowsOverlay/noRowsOverlay";
+import { errorTopScoresString, noTopScoresString } from "./strings";
 
 export function Scorboard() {
-  const { topScores } = useTopScores();
+  const {
+    data: topScores,
+    isLoading: areTopScoresLoading,
+    isError: didTopScoresLoadingFail,
+  } = useGetTopScores();
   const rows: ScoreboardRow[] = useMemo(
-    () =>
-      topScores.map((score, index) => ({
-        id: index + 1,
-        wpm: score.points,
-        date: score.date,
-      })),
+    () => convertToRows(topScores || []),
     [topScores]
   );
 
   return (
-    rows.length > 0 && (
-      <DataGrid
-        hideFooterPagination
-        disableRowSelectionOnClick
-        disableColumnMenu
-        hideFooter
-        columns={columnDefinitions}
-        rows={rows}
-      />
-    )
+    <DataGrid
+      hideFooterPagination
+      disableRowSelectionOnClick
+      disableColumnMenu
+      hideFooter
+      autoHeight
+      columns={columnDefinitions}
+      rows={rows}
+      loading={areTopScoresLoading}
+      slots={{
+        loadingOverlay: LinearProgress,
+        noRowsOverlay: NoRowsOverlay,
+      }}
+      slotProps={{
+        noRowsOverlay: {
+          description: didTopScoresLoadingFail
+            ? errorTopScoresString
+            : noTopScoresString,
+        },
+      }}
+    />
   );
 }

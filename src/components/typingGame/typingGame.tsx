@@ -11,10 +11,10 @@ import { countdownParams } from "./consts";
 import { useCountdownTimer } from "use-countdown-timer";
 import { getGameStats } from "./components/gameResult/utils";
 import { GameStats } from "./components/gameResult/types";
-import { useTopScores } from "../../hooks/topScores/useTopScores";
+import { useUpdateTopScores } from "../../hooks/topScores/useUpdateTopScore";
 
 export function TypingGame() {
-  const { updateTopScores } = useTopScores();
+  const { mutate: updateTopScores } = useUpdateTopScores();
   const [didStartTyping, setDidStartTyping] = useState<boolean>(false);
   const [isInputDisabled, setIsInputDisabled] = useState<boolean>(false);
   const { countdown, start, reset } = useCountdownTimer(countdownParams);
