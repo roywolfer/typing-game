@@ -2,13 +2,7 @@ import { OverlaySVG } from "./overlaySVG";
 import { Box, Typography } from "@mui/material";
 import { overlayBoxStyle, overlayTextStyle } from "./style";
 
-declare module "@mui/x-data-grid" {
-  interface NoRowsOverlayPropsOverrides {
-    description: string;
-  }
-}
-
-interface NoRowsOverlayProps {
+export interface NoRowsOverlayProps {
   description: string;
 }
 

@@ -15,7 +15,7 @@ export function Scorboard() {
     isError: didTopScoresLoadingFail,
   } = useGetTopScores();
   const rows: ScoreboardRow[] = useMemo(
-    () => convertToRows(topScores || []),
+    () => (topScores ? convertToRows(topScores) : []),
     [topScores]
   );
 
