@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { Word } from "../../types";
-import { words } from "../../consts";
+import { Word } from "../../components/typingGame/types";
+import { words } from "../../components/typingGame/consts";
 import { shuffle } from "./utils";
 
 interface WordListHook {
