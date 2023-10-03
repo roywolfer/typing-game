@@ -1,7 +1,7 @@
 {
   "name": "typing-game",
   "private": true,
-  "author": "Roy Wolfer"
+  "author": "Roy Wolfer",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
