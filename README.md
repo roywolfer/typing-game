@@ -38,7 +38,7 @@
 
 ## About The Project
 
-![Product Name Screen Shot][product-screenshot]
+![Typing Game Screenshot][typing-game-screenshot]
 
 This is a game made with React that tests your typing speed and accuracy.
 
@@ -95,7 +95,7 @@ npm run dev
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [`LICENSE.txt`][license-url] for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -112,10 +112,11 @@ Project Link: [https://github.com/roywolfer/typing-game](https://github.com/royw
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[product-screenshot]: assets/game-screenshot.png
+[typing-game-screenshot]: assets/game-screenshot.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Typescript.com]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [Typescript-url]: https://www.typescriptlang.org/
 [MUI.com]: https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white
 [MUI-url]: https://mui.com/
+[license-url]: ./LICENSE.txt
